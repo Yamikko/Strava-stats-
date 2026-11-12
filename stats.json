@@ -41,6 +41,14 @@
   "derniere_sortie": {
     "date": "2026-11-11",
     "km": 4.0,
-    "duree_min": 36.7
+    "duree_min": 36.7,
+    "allure_sec_km": 550
+  },
+  "semi": {
+    "objectif_km": 21.1,
+    "date_cible": "2027-05-15",
+    "semaines_restantes": 26,
+    "plus_longue_90j": 5.1,
+    "progression": 0.243
   }
 }
