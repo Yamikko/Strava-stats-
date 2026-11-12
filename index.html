@@ -42,6 +42,7 @@
 
   table{width:100%;border-collapse:collapse}
   th,td{padding:9px 0;text-align:right;font-size:15px}
+  thead th+th,tbody td+td{padding-left:10px}
   th:first-child,td:first-child{text-align:left;font-weight:500}
   thead th{font-size:11px;color:var(--dim);font-weight:500;padding-bottom:2px;
            text-transform:uppercase;letter-spacing:.06em}
@@ -104,12 +105,12 @@
     <div class="card">
       <h2>Meilleurs temps</h2>
       <table>
-        <thead><tr><th></th><th>Baptiste</th><th>Romane</th></tr></thead>
+        <thead><tr><th></th><th>Baptiste</th><th>Romane</th><th>Papa</th></tr></thead>
         <tbody>
-          <tr><td>5 km</td><td class="me" id="b5">–</td><td id="r5">–</td></tr>
-          <tr><td>10 km</td><td class="me" id="b10">–</td><td id="r10">–</td></tr>
-          <tr><td>Semi <span class="sub">21,1 km</span></td><td class="me" id="bs">–</td><td id="rs">–</td></tr>
-          <tr><td>Marathon <span class="sub">42,2 km</span></td><td class="me" id="bm">–</td><td id="rm">–</td></tr>
+          <tr><td>5 km</td><td class="me" id="b5">–</td><td id="r5">–</td><td id="p5">–</td></tr>
+          <tr><td>10 km</td><td class="me" id="b10">–</td><td id="r10">–</td><td id="p10">–</td></tr>
+          <tr><td>Semi <span class="sub">21,1 km</span></td><td class="me" id="bs">–</td><td id="rs">–</td><td id="ps">–</td></tr>
+          <tr><td>Marathon <span class="sub">42,2 km</span></td><td class="me" id="bm">–</td><td id="rm">–</td><td id="pm">–</td></tr>
         </tbody>
       </table>
     </div>
@@ -208,6 +209,10 @@ async function charger(){
     setTemps($("rs"),  mt["semi"] && mt["semi"].romane);
     setTemps($("bm"),  mt["marathon"] && mt["marathon"].baptiste);
     setTemps($("rm"),  mt["marathon"] && mt["marathon"].romane);
+    setTemps($("p5"),  mt["5km"]      && mt["5km"].papa);
+    setTemps($("p10"), mt["10km"]     && mt["10km"].papa);
+    setTemps($("ps"),  mt["semi"]     && mt["semi"].papa);
+    setTemps($("pm"),  mt["marathon"] && mt["marathon"].papa);
 
     const s = d.semi;
     if(s){
