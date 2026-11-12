@@ -128,8 +128,7 @@
            role="img" aria-label="Tracé de la plus longue sortie">
         <polyline id="trace-l" fill="none" stroke="var(--accent)" stroke-width="18"
                   stroke-linejoin="round" stroke-linecap="round" />
-        <circle id="trace-a" r="26" fill="var(--fg)" />
-        <circle id="trace-b" r="20" fill="var(--accent)" />
+        <circle id="trace-a" r="30" fill="var(--card)" stroke="var(--fg)" stroke-width="12" />
       </svg>
       <div class="tmeta"><span id="trace-km">–</span><span id="trace-date"></span></div>
     </div>
@@ -214,9 +213,8 @@ async function charger(){
     const pl = d.plus_long_parcours;
     if(pl && Array.isArray(pl.trace) && pl.trace.length > 1){
       $("trace-l").setAttribute("points", pl.trace.map(p => p[0] + "," + p[1]).join(" "));
-      const a = pl.trace[0], b = pl.trace[pl.trace.length-1];
+      const a = pl.trace[0];
       $("trace-a").setAttribute("cx", a[0]); $("trace-a").setAttribute("cy", a[1]);
-      $("trace-b").setAttribute("cx", b[0]); $("trace-b").setAttribute("cy", b[1]);
       $("trace-km").textContent = nb(pl.km) + " km";
       $("trace-date").textContent = dateFr(pl.date);
       $("carte-trace").hidden = false;
