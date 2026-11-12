@@ -24,6 +24,7 @@
         "temps_sec": 1999,
         "date": "2026-06-29",
         "km": 5.0,
+        "exact": true,
         "source": "sortie complète"
       },
       "romane": null,
@@ -34,6 +35,7 @@
         "temps_sec": 4313,
         "date": "2026-08-02",
         "km": 10.0,
+        "exact": true,
         "source": "sortie complète"
       },
       "romane": null,

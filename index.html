@@ -170,9 +170,10 @@ function allure(sec){
 }
 function km(v){ return v == null ? "–" : nb(v) + '<span>km</span>'; }
 function setTemps(el, obj){
-  const t = obj && duree(obj.temps_sec);
-  el.innerHTML = t || '<span class="na">–</span>';
-  if(obj && obj.date) el.title = obj.date;
+  if(!obj){ el.innerHTML = '<span class="na">–</span>'; el.removeAttribute("title"); return; }
+  el.innerHTML = duree(obj.temps_sec) +
+    (obj.exact === false ? ' <span class="sub">' + nb(obj.km) + ' km</span>' : "");
+  el.title = obj.date + " — " + nb(obj.km) + " km";
 }
 function dateFr(iso){
   if(!iso) return "–";
