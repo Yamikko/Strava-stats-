@@ -56,6 +56,10 @@
   .run .line span{font-size:14px;font-weight:500;color:var(--dim)}
   .run .allure{font-size:13px;color:var(--dim);margin-top:10px}
 
+  #trace{width:100%;height:auto;display:block;max-height:260px}
+  .tmeta{display:flex;justify-content:space-between;font-size:13px;color:var(--dim);margin-top:8px}
+  .tmeta span:first-child{color:var(--fg);font-weight:600}
+
   .goal{font-size:14px;color:var(--dim);margin:0 0 4px}
   .goal b{color:var(--fg);font-weight:600}
   .bar{height:7px;border-radius:99px;background:var(--sub);
@@ -118,6 +122,18 @@
   </div>
 
   <div class="col">
+    <div class="card" id="carte-trace" hidden>
+      <h2>Plus long parcours</h2>
+      <svg id="trace" viewBox="-40 -40 1080 1080" preserveAspectRatio="xMidYMid meet"
+           role="img" aria-label="Tracé de la plus longue sortie">
+        <polyline id="trace-l" fill="none" stroke="var(--accent)" stroke-width="18"
+                  stroke-linejoin="round" stroke-linecap="round" />
+        <circle id="trace-a" r="26" fill="var(--fg)" />
+        <circle id="trace-b" r="20" fill="var(--accent)" />
+      </svg>
+      <div class="tmeta"><span id="trace-km">–</span><span id="trace-date"></span></div>
+    </div>
+
     <div class="card">
       <h2>Dernière sortie</h2>
       <div class="run">
@@ -193,6 +209,17 @@ async function charger(){
         " — plus longue sortie récente : <b>" + nb(s.plus_longue_90j) + " km</b>";
       $("bar").style.width = Math.round((s.progression || 0) * 100) + "%";
       $("bar-left").textContent = nb(s.plus_longue_90j) + " km";
+    }
+
+    const pl = d.plus_long_parcours;
+    if(pl && Array.isArray(pl.trace) && pl.trace.length > 1){
+      $("trace-l").setAttribute("points", pl.trace.map(p => p[0] + "," + p[1]).join(" "));
+      const a = pl.trace[0], b = pl.trace[pl.trace.length-1];
+      $("trace-a").setAttribute("cx", a[0]); $("trace-a").setAttribute("cy", a[1]);
+      $("trace-b").setAttribute("cx", b[0]); $("trace-b").setAttribute("cy", b[1]);
+      $("trace-km").textContent = nb(pl.km) + " km";
+      $("trace-date").textContent = dateFr(pl.date);
+      $("carte-trace").hidden = false;
     }
 
     const ds = d.derniere_sortie;
