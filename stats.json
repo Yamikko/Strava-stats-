@@ -1,0 +1,40 @@
+{
+  "genere_le": "2026-11-12",
+  "annee": {
+    "label": "2026",
+    "km": 81.9
+  },
+  "mois": {
+    "label": "11/2026",
+    "km": 4.0
+  },
+  "semaine": {
+    "label": "S46",
+    "km": 4.0
+  },
+  "meilleurs_temps": {
+    "5km": {
+      "baptiste": {
+        "temps_sec": 1999,
+        "date": "2026-06-29",
+        "km": 5.0,
+        "source": "sortie complète"
+      },
+      "romane": null
+    },
+    "10km": {
+      "baptiste": {
+        "temps_sec": 4313,
+        "date": "2026-08-02",
+        "km": 10.0,
+        "source": "sortie complète"
+      },
+      "romane": null
+    }
+  },
+  "derniere_sortie": {
+    "date": "2026-11-11",
+    "km": 4.0,
+    "duree_min": 36.7
+  }
+}
