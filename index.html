@@ -68,6 +68,13 @@
   </table>
 </div>
 
+<div class="card">
+  <h2>Par année</h2>
+  <table>
+    <tbody id="annees"></tbody>
+  </table>
+</div>
+
 <div class="last" id="derniere"></div>
 <div class="err" id="err" hidden></div>
 <button id="refresh" type="button">Actualiser</button>
@@ -75,16 +82,18 @@
 <script>
 const $ = id => document.getElementById(id);
 
-function mmss(sec){
+function duree(sec){
   if(sec == null) return null;
-  const m = Math.floor(sec/60), s = Math.round(sec%60);
-  return m + ":" + String(s).padStart(2,"0");
+  const t = Math.round(sec);
+  const h = Math.floor(t/3600), m = Math.floor((t%3600)/60), s = t%60;
+  const mm = String(m).padStart(2,"0"), ss = String(s).padStart(2,"0");
+  return h > 0 ? h + ":" + mm + ":" + ss : m + ":" + ss;
 }
 function km(v){
   return v == null ? "–" : Math.round(v*10)/10 + '<span>km</span>';
 }
 function setTemps(el, obj){
-  const t = obj && mmss(obj.temps_sec);
+  const t = obj && duree(obj.temps_sec);
   el.innerHTML = t || '<span class="na">–</span>';
   if(obj && obj.date) el.title = obj.date;
 }
@@ -105,6 +114,14 @@ async function charger(){
     setTemps($("r5"),  mt["5km"]  && mt["5km"].romane);
     setTemps($("b10"), mt["10km"] && mt["10km"].baptiste);
     setTemps($("r10"), mt["10km"] && mt["10km"].romane);
+
+    const pa = d.par_annee || {};
+    const annees = Object.keys(pa).sort();
+    $("annees").innerHTML = annees.map(a =>
+      "<tr><td>" + a + "</td><td>" + (Math.round(pa[a]*10)/10) + " km</td></tr>"
+    ).join("") + (d.total_km != null
+      ? "<tr><td>Total</td><td class='me'>" + (Math.round(d.total_km*10)/10) + " km</td></tr>"
+      : "");
 
     const ds = d.derniere_sortie;
     $("derniere").textContent = ds
